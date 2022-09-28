@@ -26,9 +26,8 @@ Init_Validation()
   if [[ -z ${PG_NEW_CONF_PATH} ]]
   then
     echo
-    echo "USAGE : `basename $0` <PG_NEW_CONF_PATH> "
-    echo -e "\nExample: ./`basename $0` pmc \"30 0 * * * sh /home/root/postgresql.conf \"  \n "
-    echo "UNIX_ACCOUNT - crontab unix account to be edited"
+    echo "USAGE : ./`basename $0` <PG_NEW_CONF_PATH> "
+    echo -e "\nExample: ./`basename $0` /home/root/postgresql.conf \"  \n "
     exit 1
   fi
 
