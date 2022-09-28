@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -ev
 ##############################################################################################################
 # Script is moving current PostgresSQL DB Data directory to new Data Directory
 #############################################################################################################
@@ -72,7 +72,7 @@ Move_PG_Data_Directory_To_New_Location()
   mv data data_backup_${DATE}
 
   # Update service config file with new PG data directory path
-  sed -i "s|Environment=PGDATA=${CUR_DATA_DIR}|Environment=PGDATA=${TRG_PG_DATA_DIR}/data|g" /usr/lib/systemd/system/${SERVICE_NAME}.service
+  sed -i "s|Environment=PGDATA=${CUR_DATA_DIR}|Environment=PGDATA=${TRG_PG_DATA_DIR}|g" /usr/lib/systemd/system/${SERVICE_NAME}.service
 
   systemctl disable ${SERVICE_NAME}
   systemctl enable ${SERVICE_NAME}
@@ -83,7 +83,7 @@ Move_PG_Data_Directory_To_New_Location()
   sleep 30
   systemctl status ${SERVICE_NAME}
 
-  echo -e ${GREEN} "Done - PG DB Data Directory moved to ${TRG_PG_DATA_DIR}/data"
+  echo -e ${GREEN} "Done - PG DB Data Directory moved to ${TRG_PG_DATA_DIR}"
   echo
   echo "Old PG Data Directory Backup kept under ${CUR_DATA_DIR}/../data_backup_${DATE} directory"
   echo -e ${NC}
